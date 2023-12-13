@@ -1,0 +1,39 @@
+{
+  "name": "${localWorkspaceFolderBasename}",
+  "build": {
+    "dockerfile": "./Dockerfile",
+    "args": {
+      "VERSION": "latest",
+      "USERNAME": "vscode"
+    },
+    "context": ".."
+  },
+  "shutdownAction": "stopContainer",
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind,consistency=delegated"
+  ],
+  "customizations": {
+      "vscode": {
+          "extensions": [
+            "ms-python.python",
+            "ms-python.vscode-pylance",
+            "ms-toolsai.jupyter",
+            "davidanson.vscode-markdownlint",
+            "mhutchie.git-graph",
+            "GitHub.copilot",
+            "GitHub.copilot-chat",
+            "GitHub.vscode-github-actions",
+            "ms-azuretools.vscode-docker",
+            "janisdd.vscode-edit-csv",
+            "mechatroner.rainbow-csv"
+          ]
+      }
+  },
+  "remoteUser": "vscode",
+  "postStartCommand": "sudo chmod 777 /var/run/docker.sock"
+}
